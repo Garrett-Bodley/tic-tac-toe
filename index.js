@@ -12,8 +12,7 @@ process.stdin.on('keypress', (str, key) => {
 });
 
 const home = () => {
-  console.clear()
-  for(let i = 0; i < 100; i++) console.log()
+  clearConsole()
   console.log(figlet.textSync('Tic Tac Toe', {font: 'ANSI Shadow'}))
   console.log(`
     ========================================================================================================
@@ -31,6 +30,11 @@ const home = () => {
   process.stdin.on('keypress', (str, key) => {
     if(key.sequence == ' ') play()
   })
+}
+
+const clearConsole = () => {
+  console.clear()
+  for(let i = 0; i < 100; i++) console.log()
 }
 
 home()
