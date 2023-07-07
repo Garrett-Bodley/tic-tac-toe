@@ -9,7 +9,6 @@ readline.emitKeypressEvents(process.stdin)
 // Quit program when user input is 'Ctrl + c'
 process.stdin.on('keypress', (str, key) => {
   if(key.sequence == '\x03') process.exit()
-  console.log({str, key})
 });
 
 const home = () => {
