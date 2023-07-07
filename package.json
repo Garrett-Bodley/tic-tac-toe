@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Garrett-Bodley/tic-tac-toe/issues"
   },
-  "homepage": "https://github.com/Garrett-Bodley/tic-tac-toe#readme"
+  "homepage": "https://github.com/Garrett-Bodley/tic-tac-toe#readme",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "figlet": "^1.6.0",
+    "inquirer": "^9.2.7"
+  },
+  "type": "module"
 }
