@@ -68,12 +68,12 @@ const makeState = () => {
 }
 
 const printBoard = (boardState) => {
-  const board = `
-${boardState[0].toString()}|${boardState[1].toString()}|${boardState[2].toString()}
------
-${boardState[3].toString()}|${boardState[4].toString()}|${boardState[5].toString()}
------
-${boardState[6].toString()}|${boardState[7].toString()}|${boardState[8].toString()}
+    const board = `
+  ${boardState[0].toString()}|${boardState[1].toString()}|${boardState[2].toString()}
+  -----
+  ${boardState[3].toString()}|${boardState[4].toString()}|${boardState[5].toString()}
+  -----
+  ${boardState[6].toString()}|${boardState[7].toString()}|${boardState[8].toString()}
 `
   console.log(board)
 }
