@@ -5,6 +5,8 @@ export default function play (){
   // initialize board state and select first space on board
   const boardState = makeState()
   let selected = 0
+  let currentPlayer = 'X'
+  let moveCount = 0
   boardState[selected].isSelected = true
   printBoard(boardState)
 
@@ -12,6 +14,7 @@ export default function play (){
     process.stdin.on('keypress', (str, key) => {
       const moveList = ['up', 'down', 'left', 'right']
       if(moveList.includes(key.name)) parseDirection(key.name)
+      if(key.name == 'return') makeMove(selected)
     });
 
     const parseDirection = (name) => {
@@ -37,6 +40,21 @@ export default function play (){
       boardState[selected].isSelected = false
       selected = num
       boardState[selected].isSelected = true
+    }
+
+    const makeMove = (selected) => {
+      if(!boardState[selected].taken){
+        selectSpace(selected)
+        moveCount += 1
+        currentPlayer = moveCount % 2 == 0 ? 'X' : 'O'
+        clearBoard()
+        printBoard(boardState)
+      }
+    }
+  
+    const selectSpace = (selected) => {
+      boardState[selected].taken = true
+      boardState[selected].belongsTo = currentPlayer
     }
 
 }
