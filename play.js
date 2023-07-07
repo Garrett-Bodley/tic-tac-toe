@@ -1,17 +1,18 @@
+import Space from './space.js'
+
 export default function play (){
 
-const board = `
- | | 
------
- | | 
------
- | | 
-`
+  // initialize board state and select first space on board
+  const boardState = makeState()
+  let selected = 0
+  boardState[selected].isSelected = true
 
-console.log(board)
 }
 
-// display the board
-// let user navigate board
-// allow user to make a move/claim space
-// 
+const makeState = () => {
+  let output = []
+  for(let i = 0; i < 9; i++){
+    output.push(new Space())
+  }
+  return output
+}
