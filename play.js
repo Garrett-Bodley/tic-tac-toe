@@ -10,52 +10,52 @@ export default function play (){
   boardState[selected].isSelected = true
   printBoard(boardState)
 
-    // if input matches direction keys, select new space on board. Press Enter for to make move
-    process.stdin.on('keypress', (str, key) => {
-      const moveList = ['up', 'down', 'left', 'right']
-      if(moveList.includes(key.name)) parseDirection(key.name)
-      if(key.name == 'return') makeMove(selected)
-    });
+  // if input matches direction keys, select new space on board. Press Enter for to make move
+  process.stdin.on('keypress', (str, key) => {
+    const moveList = ['up', 'down', 'left', 'right']
+    if(moveList.includes(key.name)) parseDirection(key.name)
+    if(key.name == 'return') makeMove(selected)
+  });
 
-    const parseDirection = (name) => {
-      switch(name){
-        case 'up':
-          if(selected > 2) updateSelection(selected - 3)
-          break
-        case 'down':
-          if(selected < 6) updateSelection(selected + 3)
-          break
-        case 'left':
-          if([1, 2, 4, 5, 7, 8].includes(selected)) updateSelection(selected - 1)
-          break
-        case 'right':
-          if([0, 1, 3, 4, 6, 7].includes(selected)) updateSelection(selected + 1)
-          break
-      }
+  const parseDirection = (name) => {
+    switch(name){
+      case 'up':
+        if(selected > 2) updateSelection(selected - 3)
+        break
+      case 'down':
+        if(selected < 6) updateSelection(selected + 3)
+        break
+      case 'left':
+        if([1, 2, 4, 5, 7, 8].includes(selected)) updateSelection(selected - 1)
+        break
+      case 'right':
+        if([0, 1, 3, 4, 6, 7].includes(selected)) updateSelection(selected + 1)
+        break
+    }
+    clearBoard()
+    printBoard(boardState)
+  }
+
+  const updateSelection = (num) => {
+    boardState[selected].isSelected = false
+    selected = num
+    boardState[selected].isSelected = true
+  }
+
+  const makeMove = (selected) => {
+    if(!boardState[selected].taken){
+      selectSpace(selected)
+      moveCount += 1
+      currentPlayer = moveCount % 2 == 0 ? 'X' : 'O'
       clearBoard()
       printBoard(boardState)
     }
+  }
 
-    const updateSelection = (num) => {
-      boardState[selected].isSelected = false
-      selected = num
-      boardState[selected].isSelected = true
-    }
-
-    const makeMove = (selected) => {
-      if(!boardState[selected].taken){
-        selectSpace(selected)
-        moveCount += 1
-        currentPlayer = moveCount % 2 == 0 ? 'X' : 'O'
-        clearBoard()
-        printBoard(boardState)
-      }
-    }
-  
-    const selectSpace = (selected) => {
-      boardState[selected].taken = true
-      boardState[selected].belongsTo = currentPlayer
-    }
+  const selectSpace = (selected) => {
+    boardState[selected].taken = true
+    boardState[selected].belongsTo = currentPlayer
+  }
 
 }
 
