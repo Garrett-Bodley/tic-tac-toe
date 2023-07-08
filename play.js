@@ -4,7 +4,7 @@ import figlet from 'figlet'
 
 export default function play (){
 
-  // initialize board state and select first space on board
+  // Initialize board state and select first space on board
   const boardState = makeState()
   let selected = 0
   boardState[selected].isSelected = true
@@ -12,7 +12,7 @@ export default function play (){
   let moveCount = 0
   let hasWinner = false
 
-  // if input matches direction keys, select new space on board. Press Enter for to make move
+  // If input matches direction keys, select new space on board. Press Space to make move
   process.stdin.on('keypress', (str, key) => {
     const moveList = ['up', 'down', 'left', 'right']
     if(moveList.includes(key.name)) parseDirection(key.name)
@@ -89,6 +89,7 @@ export default function play (){
     console.log(board)
   }
 
+  // Outputs string that displays whose turn it is
   const parsePlayerStatement = () => {
     if(currentPlayer == 'X') return chalk.bold.bgRed(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Press SPACE to confirm selection.`)
     return chalk.bold.bgBlue(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Press SPACE to confirm selection.`)
@@ -99,6 +100,8 @@ export default function play (){
     process.stdout.clearLine(1)
   }
 
+  // Checks if a winner exists and returns flag. 
+  // 0: game continues, 1: Player 1 wins, 2: Player 2 wins, 3: Draw game
   const checkForWinner = (boardState) => {
     const winningCombos = [
       [0, 1, 2],
@@ -125,6 +128,7 @@ export default function play (){
   printBoard(boardState)
 }
 
+// boardState factory
 const makeState = () => {
   let output = []
   for(let i = 0; i < 9; i++){
