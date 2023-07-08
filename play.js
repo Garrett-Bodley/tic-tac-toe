@@ -72,7 +72,7 @@ export default function play (){
   
   const printBoard = (boardState) => {
       const board = `
-    ${chalk.bold.bgYellow(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Press SPACE to confirm selection.`)}
+    ${parsePlayerStatement()}
     
            |       |       
        ${boardState[0].toString()}   |   ${boardState[1].toString()}   |   ${boardState[2].toString()}   
@@ -87,6 +87,11 @@ export default function play (){
            |       |       
   `
     console.log(board)
+  }
+
+  const parsePlayerStatement = () => {
+    if(currentPlayer == 'X') return chalk.bold.bgRed(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Press SPACE to confirm selection.`)
+    return chalk.bold.bgBlue(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Press SPACE to confirm selection.`)
   }
   
   const clearBoard = () => {
