@@ -1,5 +1,6 @@
 import Space from './space.js'
 import chalk from 'chalk'
+import figlet from 'figlet'
 
 export default function play (){
 
@@ -8,6 +9,8 @@ export default function play (){
   let selected = 0
   let currentPlayer = 'X'
   let moveCount = 0
+  let hasWinner = false
+  let isDraw = false
   boardState[selected].isSelected = true
 
   // if input matches direction keys, select new space on board. Press Enter for to make move
@@ -47,8 +50,17 @@ export default function play (){
       selectSpace(selected)
       moveCount += 1
       currentPlayer = moveCount % 2 == 0 ? 'X' : 'O'
+      let flag = checkForWinner(boardState)
       clearBoard()
       printBoard(boardState)
+      if(flag){
+        if(flag > 2){
+          console.log(figlet.textSync('Draw Game', {font: 'ANSI Shadow'}))
+        }else{
+          console.log(figlet.textSync(`Player ${flag} Wins!`, {font: 'ANSI Shadow'}))
+        }
+        process.exit()
+      }
     }
   }
 
@@ -73,6 +85,29 @@ export default function play (){
   const clearBoard = () => {
     process.stdout.moveCursor(-50,-9)
     process.stdout.clearLine(1)
+  }
+
+  const checkForWinner = (boardState) => {
+    const winningCombos = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [6, 4, 2]
+    ]
+
+    for(const combo of winningCombos){
+      let [a, b, c] = combo
+      if(boardState[a].belongsTo !== null && boardState[a].belongsTo == boardState[b].belongsTo && boardState[a].belongsTo == boardState[c].belongsTo){
+        hasWinner = true
+        return boardState[a].belongsTo == 'X' ? 1: 2
+      }
+      if(!hasWinner && moveCount >= 9) return 3
+    }
+    return 0
   }
 
   printBoard(boardState)
