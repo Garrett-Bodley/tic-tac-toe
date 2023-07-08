@@ -44,6 +44,7 @@ const home = async () => {
 // Clear console and print 
 const clearConsole = () => {
   console.log('\x1b[2J')
+  console.log(`\x1b[H`)
 }
 
 home()
