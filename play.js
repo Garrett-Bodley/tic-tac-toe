@@ -17,7 +17,7 @@ export default function play (){
   process.stdin.on('keypress', (str, key) => {
     const moveList = ['up', 'down', 'left', 'right']
     if(moveList.includes(key.name)) parseDirection(key.name)
-    if(key.name == 'return') makeMove(selected)
+    if(key.name == 'space') makeMove(selected)
   });
 
   const parseDirection = (name) => {
@@ -50,9 +50,9 @@ export default function play (){
       selectSpace(selected)
       moveCount += 1
       currentPlayer = moveCount % 2 == 0 ? 'X' : 'O'
-      let flag = checkForWinner(boardState)
       clearBoard()
       printBoard(boardState)
+      let flag = checkForWinner(boardState)
       if(flag){
         if(flag > 2){
           console.log(figlet.textSync('Draw Game', {font: 'ANSI Shadow'}))
@@ -71,7 +71,7 @@ export default function play (){
   
   const printBoard = (boardState) => {
       const board = `
-    ${chalk.bold(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer})`)}
+    ${chalk.bold.bgYellow(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Press SPACE to confirm selection.`)}
     
     ${boardState[0].toString()}|${boardState[1].toString()}|${boardState[2].toString()}
     -----
