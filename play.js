@@ -10,7 +10,6 @@ export default function play (){
   boardState[selected].isSelected = true
   let currentPlayer = 'X'
   let moveCount = 0
-  let hasWinner = false
 
   // If input matches direction keys, select new space on board. Press Space to make move
   process.stdin.on('keypress', (str, key) => {
@@ -48,15 +47,7 @@ export default function play (){
   const makeMove = (selected) => {
     if(!boardState[selected].taken){
       selectSpace(selected)
-      let flag = checkForWinner(boardState)
-      if(flag){
-        if(flag > 2){
-          console.log(figlet.textSync('Draw Game', {font: 'ANSI Shadow'}))
-        }else{
-          console.log(figlet.textSync(`Player ${flag} Wins!`, {font: 'ANSI Shadow'}))
-        }
-        process.exit()
-      }
+      checkForWinner(boardState)
     }
   }
 
@@ -100,8 +91,7 @@ export default function play (){
     process.stdout.clearLine(1)
   }
 
-  // Checks if a winner exists and returns flag. 
-  // 0: game continues, 1: Player 1 wins, 2: Player 2 wins, 3: Draw game
+  // Checks for win or draw. If win/draw print message and quit program.
   const checkForWinner = (boardState) => {
     const winningCombos = [
       [0, 1, 2],
@@ -117,12 +107,15 @@ export default function play (){
     for(const combo of winningCombos){
       let [a, b, c] = combo
       if(boardState[a].belongsTo !== null && boardState[a].belongsTo == boardState[b].belongsTo && boardState[a].belongsTo == boardState[c].belongsTo){
-        hasWinner = true
-        return boardState[a].belongsTo == 'X' ? 1: 2
+        console.log(figlet.textSync(`Player ${boardState[a].belongsTo == 'X' ? 1: 2} Wins!`, {font: 'ANSI Shadow'}))
+        process.exit()
       }
     }
-    if(!hasWinner && moveCount >= 9) return 3
-    return 0
+
+    if(moveCount >= 9){
+      console.log(figlet.textSync('Draw Game', {font: 'ANSI Shadow'}))
+      process.exit()
+    }
   }
 
   printBoard(boardState)
