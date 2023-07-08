@@ -11,7 +11,7 @@ process.stdin.on('keypress', (str, key) => {
   if(key.sequence == '\x03') process.exit()
 });
 
-const home = () => {
+const home = async () => {
   clearConsole()
   console.log(figlet.textSync('Tic Tac Toe', {font: 'ANSI Shadow'}))
   console.log(`
@@ -27,9 +27,18 @@ const home = () => {
     ${chalk.bold.underline.bgYellowBright(`Press SPACE to START`)}
     ========================================================================================================`
   )
-  process.stdin.once('keypress', (str, key) => {
-    if(key.sequence == ' ') return play()
-  })
+
+  const spacePress = async () => {
+    return new Promise(resolve => {
+      process.stdin.on('keypress', (str, key) => {
+        if(key.name == 'space'){
+          resolve()
+        }
+      }) 
+    })
+  }
+  await spacePress()
+  play()
 }
 
 const clearConsole = () => {
