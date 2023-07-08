@@ -7,11 +7,10 @@ export default function play (){
   // initialize board state and select first space on board
   const boardState = makeState()
   let selected = 0
+  boardState[selected].isSelected = true
   let currentPlayer = 'X'
   let moveCount = 0
   let hasWinner = false
-  let isDraw = false
-  boardState[selected].isSelected = true
 
   // if input matches direction keys, select new space on board. Press Enter for to make move
   process.stdin.on('keypress', (str, key) => {
@@ -45,13 +44,10 @@ export default function play (){
     boardState[selected].isSelected = true
   }
 
+  // Process player move and check if there is a winner or draw
   const makeMove = (selected) => {
     if(!boardState[selected].taken){
       selectSpace(selected)
-      moveCount += 1
-      currentPlayer = moveCount % 2 == 0 ? 'X' : 'O'
-      clearBoard()
-      printBoard(boardState)
       let flag = checkForWinner(boardState)
       if(flag){
         if(flag > 2){
@@ -64,9 +60,14 @@ export default function play (){
     }
   }
 
+  // Update boardState to reflect player selection. Update current player and reprint board.
   const selectSpace = (selected) => {
     boardState[selected].taken = true
     boardState[selected].belongsTo = currentPlayer
+    moveCount += 1
+    currentPlayer = moveCount % 2 == 0 ? 'X' : 'O'
+    clearBoard()
+    printBoard(boardState)
   }
   
   const printBoard = (boardState) => {
