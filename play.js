@@ -8,7 +8,6 @@ export default function play (){
   let currentPlayer = 'X'
   let moveCount = 0
   boardState[selected].isSelected = true
-  printBoard(boardState)
 
   // if input matches direction keys, select new space on board. Press Enter for to make move
   process.stdin.on('keypress', (str, key) => {
@@ -56,7 +55,26 @@ export default function play (){
     boardState[selected].taken = true
     boardState[selected].belongsTo = currentPlayer
   }
+  
+  const printBoard = (boardState) => {
+      const board = `
+    ${chalk.bold(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer})`)}
+    
+    ${boardState[0].toString()}|${boardState[1].toString()}|${boardState[2].toString()}
+    -----
+    ${boardState[3].toString()}|${boardState[4].toString()}|${boardState[5].toString()}
+    -----
+    ${boardState[6].toString()}|${boardState[7].toString()}|${boardState[8].toString()}
+  `
+    console.log(board)
+  }
+  
+  const clearBoard = () => {
+    process.stdout.moveCursor(-50,-9)
+    process.stdout.clearLine(1)
+  }
 
+  printBoard(boardState)
 }
 
 const makeState = () => {
@@ -65,20 +83,4 @@ const makeState = () => {
     output.push(new Space())
   }
   return output
-}
-
-const printBoard = (boardState) => {
-    const board = `
-  ${boardState[0].toString()}|${boardState[1].toString()}|${boardState[2].toString()}
-  -----
-  ${boardState[3].toString()}|${boardState[4].toString()}|${boardState[5].toString()}
-  -----
-  ${boardState[6].toString()}|${boardState[7].toString()}|${boardState[8].toString()}
-`
-  console.log(board)
-}
-
-const clearBoard = () => {
-  process.stdout.moveCursor(-50,-7)
-  process.stdout.clearLine(1)
 }
