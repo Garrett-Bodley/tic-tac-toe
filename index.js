@@ -41,9 +41,9 @@ const home = async () => {
   play()
 }
 
+// Clear console and print 
 const clearConsole = () => {
-  console.clear()
-  for(let i = 0; i < 100; i++) console.log()
+  console.log('\x1b[2J')
 }
 
 home()
