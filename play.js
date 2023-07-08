@@ -74,17 +74,23 @@ export default function play (){
       const board = `
     ${chalk.bold.bgYellow(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Press SPACE to confirm selection.`)}
     
-    ${boardState[0].toString()}|${boardState[1].toString()}|${boardState[2].toString()}
-    -----
-    ${boardState[3].toString()}|${boardState[4].toString()}|${boardState[5].toString()}
-    -----
-    ${boardState[6].toString()}|${boardState[7].toString()}|${boardState[8].toString()}
+           |       |       
+       ${boardState[0].toString()}   |   ${boardState[1].toString()}   |   ${boardState[2].toString()}   
+           |       |       
+    -------+-------+-------
+           |       |       
+       ${boardState[3].toString()}   |   ${boardState[4].toString()}   |   ${boardState[5].toString()}   
+           |       |       
+    -------+-------+-------
+           |       |       
+       ${boardState[6].toString()}   |   ${boardState[7].toString()}   |   ${boardState[8].toString()}   
+           |       |       
   `
     console.log(board)
   }
   
   const clearBoard = () => {
-    process.stdout.moveCursor(-50,-9)
+    process.stdout.moveCursor(-50,-15)
     process.stdout.clearLine(1)
   }
 
