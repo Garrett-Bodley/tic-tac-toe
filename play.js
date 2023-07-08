@@ -105,8 +105,8 @@ export default function play (){
         hasWinner = true
         return boardState[a].belongsTo == 'X' ? 1: 2
       }
-      if(!hasWinner && moveCount >= 9) return 3
     }
+    if(!hasWinner && moveCount >= 9) return 3
     return 0
   }
 
