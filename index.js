@@ -27,8 +27,8 @@ const home = () => {
     ${chalk.bold.underline.bgYellowBright(`Press SPACE to START`)}
     ========================================================================================================`
   )
-  process.stdin.on('keypress', (str, key) => {
-    if(key.sequence == ' ') play()
+  process.stdin.once('keypress', (str, key) => {
+    if(key.sequence == ' ') return play()
   })
 }
 
