@@ -28,7 +28,7 @@ const home = async () => {
     ========================================================================================================`
   )
 
-  const spacePress = async () => {
+  const spacePress = () => {
     return new Promise(resolve => {
       process.stdin.on('keypress', (str, key) => {
         if(key.name == 'space'){
