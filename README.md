@@ -8,7 +8,7 @@
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
   <a href="https://github.com/Garrett-Bodley/tic-tac-toe/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/Garrett-Bodley/Tic Tac Toe" />
+    <img alt="License: MIT" src="https://img.shields.io/github/license/Garrett-Bodley/tic-tac-toe" />
   </a>
 </p>
 
