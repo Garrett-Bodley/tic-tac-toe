@@ -19,6 +19,13 @@ export default function play (){
   });
 
   const parseDirection = (name) => {
+    // Board is represented as a simple array
+    // This logic parses user input and then selects a different space if it is within bounds
+    // ex:
+    // [0, 1, 2,
+    //  3, 4, 5,
+    //  6, 7, 8]
+    
     switch(name){
       case 'up':
         if(selected > 2) updateSelection(selected - 3)
