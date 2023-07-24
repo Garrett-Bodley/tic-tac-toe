@@ -7,14 +7,17 @@ export default class Space{
     this.belongsTo = null
   }
 
+  // parses status of space and outputs string representation for user to view 
   toString(){
     if(this.taken){
       if(this.isSelected){
-        return this.belongsTo == 'X' ? chalk.bold.inverse(`${this.belongsTo}`) : chalk.bold.inverse(`${this.belongsTo}`)
+        // X is red, O is blue, selected spaces are inverted
+        return this.belongsTo == 'X' ? chalk.bold.red.inverse(`${this.belongsTo}`) : chalk.bold.blue.inverse(`${this.belongsTo}`)
       }else{
         return this.belongsTo == 'X' ? chalk.bold.red(`${this.belongsTo}`) : chalk.bold.blue(`${this.belongsTo}`)
       }
     }else{
+      // highlight space if selected
       if(this.isSelected){
         return chalk.inverse(` `)
       }else{
