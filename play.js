@@ -25,7 +25,7 @@ export default function play (){
     // [0, 1, 2,
     //  3, 4, 5,
     //  6, 7, 8]
-    
+
     switch(name){
       case 'up':
         if(selected > 2) updateSelection(selected - 3)
@@ -53,13 +53,13 @@ export default function play (){
   // Process player move and check if there is a winner or draw
   const makeMove = (selected) => {
     if(!boardState[selected].taken){
-      selectSpace(selected)
+      claimSpace(selected)
       checkForWinner(boardState)
     }
   }
 
-  // Update boardState to reflect player selection. Update current player and reprint board.
-  const selectSpace = (selected) => {
+  // Update boardState when player claims the selected space. Update current player and reprint board.
+  const claimSpace = (selected) => {
     boardState[selected].taken = true
     boardState[selected].belongsTo = currentPlayer
     moveCount += 1
@@ -89,8 +89,8 @@ export default function play (){
 
   // Outputs string that displays whose turn it is
   const parsePlayerStatement = () => {
-    if(currentPlayer == 'X') return chalk.bold.bgRed(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Press SPACE to confirm selection.`)
-    return chalk.bold.bgBlue(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Press SPACE to confirm selection.`)
+    if(currentPlayer == 'X') return chalk.bold.bgRed(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Navigate using the arrow keys. Press SPACE to confirm selection.`)
+    return chalk.bold.bgBlue(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Navigate using the arrow keys. Press SPACE to confirm selection.`)
   }
   
   const clearBoard = () => {
