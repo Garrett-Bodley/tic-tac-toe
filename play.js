@@ -89,8 +89,8 @@ export default function play (){
 
   // Outputs string that displays whose turn it is
   const parsePlayerStatement = () => {
-    if(currentPlayer == 'X') return chalk.bold.bgRed(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Navigate using the arrow keys. Press SPACE to confirm selection.`)
-    return chalk.bold.bgBlue(`Player ${(moveCount % 2) + 1}'s Turn (${currentPlayer}). Navigate using the arrow keys. Press SPACE to confirm selection.`)
+    if(currentPlayer == 'X') return chalk.bold.bgRed(`Player 1's Turn (X). Navigate using the arrow keys. Press SPACE to confirm selection.`)
+    return chalk.bold.bgBlue(`Player 2's Turn (O). Navigate using the arrow keys. Press SPACE to confirm selection.`)
   }
   
   const clearBoard = () => {
